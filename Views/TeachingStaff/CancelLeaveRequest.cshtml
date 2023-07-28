@@ -1,0 +1,148 @@
+﻿@model List<Leave_Management.Models.LeaveRequest>
+
+@{
+    ViewBag.Title = "Cancel Leave Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>@ViewBag.Title</title>
+    <style>
+        /* Custom styles for the index page */
+        body {
+            margin: 0;
+            padding-top: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        /* Custom CSS to change the navbar color and make it fit the screen width */
+        .navbar {
+            margin: 0;
+            background-color: rgba(25, 158, 225, 0.9);
+            width: 100%;
+        }
+
+        /* Custom CSS for the footer */
+        .footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF; /* Blue color */
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #fff; /* White text color */
+            font-weight: bold;
+        }
+
+        /* Styling for the cancel button */
+        .cancel-button {
+            background-color: rgba(220, 53, 69, 0.9);
+            border-color: rgba(220, 53, 69, 0.9);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+            .cancel-button:hover {
+                background-color: #dc3545;
+            }
+
+        h2 {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <!-- College Logo -->
+                <img src="~/Resources/uc-college-aluva-mobile-logo (1).png" alt="College Logo" class="college-logo">
+
+                <!-- College Name and Tagline -->
+                <div class="college-name">Master of Computer Applications</div>
+                <div class="tagline">Union Christian College, Aluva</div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <h2>@ViewBag.Title</h2>
+        @if (Model.Count == 0)
+        {
+            <p>No leave requests found.</p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Leave Request ID</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var leaveRequest in Model)
+                    {
+                        <tr>
+                            <td>@leaveRequest.Id</td>
+                            <td>@leaveRequest.FromDate.ToString("yyyy-MM-dd")</td>
+                            <td>@leaveRequest.ToDate.ToString("yyyy-MM-dd")</td>
+                            <td>@leaveRequest.Type</td>
+                            <td>@leaveRequest.Status</td>
+                            <td>
+                                @using (Html.BeginForm("CancelLeaveRequest", "TeachingStaff", FormMethod.Post))
+                                {
+                                    @Html.Hidden("leaveRequestId", leaveRequest.Id)
+                                    <button type="submit" class="btn btn-danger cancel-button">Cancel</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <footer class="footer">
+        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

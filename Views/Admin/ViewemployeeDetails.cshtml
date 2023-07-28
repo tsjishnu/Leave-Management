@@ -1,0 +1,309 @@
+﻿@model Leave_Management.Models.ViewModels.EmployeeDetailsViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Forgot Password</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles for the table */
+        .table {
+            width: 100%;
+        }
+
+            .table th, .table td {
+                vertical-align: middle;
+                text-align: center;
+                padding: 12px; /* Update the padding to match the rest of the page */
+            }
+
+            .table th {
+                font-weight: bold;
+            }
+
+            .table tbody tr:hover {
+                background-color: #f2f2f2;
+            }
+
+        /* Updated styles for the table */
+        .table {
+            background-color: #1b6ec2; /* Same as the navbar color (blue) */
+            color: #fff; /* White text color */
+        }
+
+            .table th, .table td {
+                background-color: #f8f9fa; /* Light gray background for table cells */
+                color: #333; /* Dark text color */
+            }
+
+            .table thead th {
+                background-color: rgba(25, 158, 225, 0.9); /* Blue background for table header */
+                color: #fff; /* White text color for table header */
+            }
+
+            .table tbody tr:nth-child(even) {
+                background-color: #f2f2f2; /* Light gray background for even rows */
+            }
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff; /* College's official blue color */
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #333; /* Custom text color */
+        }
+
+        /* Custom CSS to reset the default margin and padding on the body, header, and nav elements */
+        body, header, nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f8f9fa; /* Match the footer's background color */
+            padding-top: 160px; /* Add padding for the fixed-top navigation bar and header */
+        }
+
+        /* Custom CSS to change the color of "Forgot Password" heading to blue color */
+        h2 {
+            color: rgba(25, 158, 225, 0.9); /* Blue color */
+        }
+
+        /* Custom CSS to center the form elements */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Custom CSS to change the navbar color */
+        .navbar {
+            margin: 0;
+            background-color: #1b6ec2; /* Blue color */
+            width: 100%;
+        }
+
+        /* Additional styles for the form-label and narrow-textbox */
+        .form-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333; /* Custom text color */
+            margin-bottom: 8px; /* Add some margin between the label and the textbox */
+        }
+
+        .narrow-textbox {
+            width: 100%;
+            max-width: 260px;
+            height: 40px;
+            margin-top: 9px;
+            border-radius: 30px; /* Oval shape */
+            border: 2px solid rgba(25, 158, 225, 0.9); /* Blue outline */
+            padding: 8px 16px; /* Adding padding to maintain space between oval border and text */
+            font-size: 16px;
+            font-weight: bold;
+            color: #333; /* Custom text color */
+        }
+
+        /* Custom CSS for the login-button */
+        .login-button {
+            width: 100%;
+            max-width: 260px;
+            height: 40px;
+            margin-top: 20px;
+            border-radius: 30px; /* Oval shape */
+            background-color: #1b6ec2; /* Blue color */
+            border-color: #1b6ec2; /* Blue color */
+            color: #fff; /* White text color */
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase; /* Convert text to uppercase */
+        }
+
+            .login-button:hover {
+                background-color: #1b9fe1;
+            }
+
+        /* Custom CSS to change the header background color */
+        .navbar {
+            margin: 0;
+            background-color: #1b6ec2; /* Blue color */
+            width: 100%;
+        }
+
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF; /* Blue color */
+            margin-left: 150px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #fff; /* White text color */
+            font-weight: bold;
+        }
+        /* Styles for Employee Details and Leave Count Container */
+        .left-container {
+            margin-bottom: 20px;
+        }
+
+        /* Styles for Leave Requests Container */
+        .right-container {
+            margin-bottom: 20px;
+        }
+
+        /* Additional styles for the container boxes */
+        .container-box {
+            background-color: #fff;
+            border: 1px solid rgba(25, 158, 225, 0.9); /* Blue color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom styles for section headings */
+        .section-heading {
+            color: rgba(25, 158, 225, 0.9); /* Blue color */
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <!-- College Logo -->
+                <img src="~/Resources/uc-college-aluva-mobile-logo (1).png" alt="College Logo" class="college-logo">
+
+                <!-- College Name and Tagline -->
+                <div class="college-name">Master of Computer Applications</div>
+                <div class="tagline">Union Christian College, Aluva</div>
+
+          
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <!-- Left Section - Employee Details and Leave Count by Type -->
+            <div class="col-md-6">
+                <!-- Employee Details Container -->
+                <div class="container-box left-container">
+                    <h2>Employee Details</h2>
+                    <div>
+                        <p>Full Name: @Model.Employee.FullName</p>
+                        <p>Email: @Model.Employee.Email</p>
+                        <p>Phone: @Model.Employee.Phone</p>
+                        <p>Category: @Model.Employee.Category</p>
+                        <p>Joining Date: @Model.Employee.JoiningDate</p>
+                        <p>Address: @Model.Employee.Address</p>
+                        <p>Date of Birth: @Model.Employee.DateofBirth</p>
+                        <p>Status: @Model.Employee.Status</p>
+
+                        <a href="@Url.Action("EditEmployee", "Admin", new { email = @Model.Employee.Email })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("RemoveEmployee", "Admin", new { email = @Model.Employee.Email })" class="btn btn-danger">Remove</a>
+                        
+                        <!-- Add other employee details here -->
+                    </div>
+                </div>
+
+                <!-- Leave Count by Type Container -->
+                <div class="container-box left-container">
+                    <div class="leave-count-container">
+                        <h2 class="section-heading">Leave Count by Type</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Count</th>
+                                        <th>Total Days</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var typeCount in Model.LeaveTypesCount)
+                                    {
+                                        <tr>
+                                            <td>@typeCount.Type</td>
+                                            <td>@typeCount.Count</td>
+                                            <td>@typeCount.TotalDays</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Right Section - Leave Requests -->
+            <div class="col-md-6">
+                <!-- Leave Requests Container -->
+                <div class="container-box right-container">
+                    <h2 class="section-heading">Leave Requests</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Total Days</th>
+                                    <th>Reason</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var leave in Model.ApprovedLeaves)
+                                {
+                                    <tr>
+                                        <td>@leave.Type</td>
+                                        <td>@leave.FromDate.ToString("yyyy-MM-dd")</td>
+                                        <td>@leave.ToDate.ToString("yyyy-MM-dd")</td>
+                                        <td>@((leave.ToDate - leave.FromDate).Days + 1)</td>
+                                        <td>@leave.Reason</td>
+                                        <td>@leave.Remarks</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="mt-5 bg-light text-center">
+        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

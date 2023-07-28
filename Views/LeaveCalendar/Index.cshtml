@@ -1,0 +1,18 @@
+﻿@model List<List<Leave_Management.Models.LeaveRequest>>
+
+@{
+    ViewBag.Title = "Leave Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@foreach (var week in Model)
+{
+    <div>
+        @foreach (var leaveRequest in week)
+        {
+            <p>@leaveRequest.Email - @leaveRequest.Type - @leaveRequest.FromDate.ToShortDateString()</p>
+        }
+    </div>
+}

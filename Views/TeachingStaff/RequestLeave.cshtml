@@ -1,0 +1,126 @@
+﻿@model Leave_Management.Models.Leave
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create Leave</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF; /* Blue color */
+            left:150px
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #fff; /* White text color */
+            font-weight: bold;
+        }
+
+        /* Custom CSS to reset the default margin and padding on the body, header, and nav elements */
+        body, header, nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f8f9fa; /* Match the footer's background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 85vh;
+        }
+
+        /* Custom CSS to change the color of "Request Leave" heading to blue color */
+        h1 {
+            color: rgba(25, 158, 225, 0.9); /* Blue color */
+        }
+
+        /* Custom CSS to adjust the width of the select element and submit button */
+        #Type {
+            width: 100%;
+            max-width: 260px;
+            height: 40px;
+            margin-top: 9px;
+            border-radius: 30px; /* Oval shape */
+            border: 2px solid rgba(25, 158, 225, 0.9); /* Blue outline */
+            padding: 8px 16px; /* Adding padding to maintain space between oval border and text */
+        }
+
+        .submit-button {
+            width: 100%;
+            max-width: 260px;
+            background-color: rgba(25, 158, 225, 0.9); /* Blue color */
+            border-color: rgba(25, 158, 225, 0.9); /* Blue color */
+        }
+
+        /* Custom CSS to center the form elements */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Custom CSS to change the navbar color */
+        .navbar {
+            background-color: rgba(25, 158, 225, 0.9); /* Blue color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <!-- College Logo -->
+                <img src="~/Resources/uc-college-aluva-mobile-logo (1).png" alt="College Logo" class="college-logo">
+
+                <!-- College Name and Tagline -->
+                <div class="college-name">Master of Computer Applications</div>
+                <div class="tagline">Union Christian College, Aluva</div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1 class="text-center mt-4">Request Leave</h1>
+
+        @using (Html.BeginForm("RequestLeave", "TeachingStaff", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-container">
+                <select name="Type" id="Type">
+                    <option value="Casual Leave">Casual Leave</option>
+                    <option value="Maternity Leave">Maternity Leave</option>
+                    <option value="Duty Leave">Duty Leave</option>
+                    <option value="Study Leave">Study Leave</option>
+                    <option value="Vacation Leave">Vacation Leave</option>
+                    <option value="Medical Leave">Medical Leave</option>
+                    <option value="Commuted Leave">Commuted Leave</option>
+                </select>
+                <input type="submit" value="Submit" class="btn btn-primary mt-2 submit-button" />
+            </div>
+        }
+    </div>
+
+    <footer class="mt-5 bg-light text-center py-3 fixed-bottom">
+        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

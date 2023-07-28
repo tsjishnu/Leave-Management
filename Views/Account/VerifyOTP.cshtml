@@ -1,0 +1,187 @@
+﻿@model Leave_Management.Models.VerifyOTPViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Verify OTP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff; /* College's official blue color */
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #333; /* Custom text color */
+        }
+
+        /* Custom CSS to reset the default margin and padding on the body, header, and nav elements */
+        body, header, nav {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f8f9fa; /* Match the footer's background color */
+        }
+
+        /* Custom CSS to center the form elements */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid rgba(25, 158, 225, 0.9); /* Blue color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 160px auto 0;
+            margin: 0 auto; /* Center the container horizontally */
+            margin-top: 293px; /* Add margin from top */ /* Center the container with margin-top for header */
+        }
+
+        /* Custom CSS for the login-button */
+        .login-button {
+            width: 100%;
+            max-width: 260px;
+            height: 40px;
+            margin-top: 20px;
+            border-radius: 30px; /* Oval shape */
+            background-color: rgba(25, 158, 225, 0.9); /* Blue color */
+            border-color: rgba(25, 158, 225, 0.9); /* Blue color */
+            color: #fff; /* White text color */
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase; /* Convert text to uppercase */
+        }
+
+            .login-button:hover {
+                background-color: #1b9fe1;
+            }
+
+        /* Custom CSS for the h2 */
+        h2 {
+            text-align: center;
+            color: rgba(25, 158, 225, 0.9); /* Blue color */
+            margin-bottom: 20px;
+        }
+
+        /* Custom CSS for the form-label and narrow-textbox */
+        .form-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333; /* Custom text color */
+            margin-bottom: 8px; /* Add some margin between the label and the textbox */
+        }
+
+        .narrow-textbox {
+            width: 100%;
+            max-width: 260px;
+            height: 40px;
+            margin-top: 9px;
+            border-radius: 30px; /* Oval shape */
+            border: 2px solid rgba(25, 158, 225, 0.9); /* Blue outline */
+            padding: 8px 16px; /* Adding padding to maintain space between oval border and text */
+            font-size: 16px;
+            font-weight: bold;
+            color: #333; /* Custom text color */
+        }
+
+        /* Custom CSS to change the header background color */
+        .navbar {
+            margin: 0;
+            background-color: rgba(25, 158, 225, 0.9); /* Blue color */
+            width: 100%;
+        }
+
+        /* Custom styles for the college logo */
+        .college-logo {
+            max-width: 100px;
+        }
+
+        /* Custom styles for college name and tagline */
+        .college-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF; /* Blue color */
+            margin-left: 150px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #fff; /* White text color */
+            font-weight: bold;
+        }
+
+        /* Custom CSS for the footer */
+        .footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <!-- College Logo -->
+                <img src="~/Resources/uc-college-aluva-mobile-logo (1).png" alt="College Logo" class="college-logo">
+
+                <!-- College Name and Tagline -->
+                <div class="college-name">Master of Computer Applications</div>
+                <div class="tagline">Union Christian College, Aluva</div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Verify OTP</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="Otp" class="form-label">OTP:</label>
+                    <div>
+                        @Html.TextBoxFor(model => model.Otp, new { @class = "form-control narrow-textbox" })
+                        @Html.ValidationMessageFor(model => model.Otp)
+                    </div>
+                </div>
+
+                <button type="submit" class="login-button">Verify</button>
+
+                if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="text-danger">@ViewBag.ErrorMessage</div>
+                }
+            }
+        </div>
+    </div>
+
+    <footer class="mt-5 bg-light text-center py-3 fixed-bottom">
+        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+﻿@model List<Leave_Management.Models.DutyLeave>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<style>
+    body {
+        margin: 0;
+        padding-top: 0;
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    h2 {
+        text-align: center;
+        color: rgba(25, 158, 225, 0.9);
+    }
+    .navbar {
+        margin: 0;
+        background-color: rgba(25, 158, 225, 0.9);
+        width: 100%;
+    }
+    /* Custom CSS for the footer */
+    .footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 10px;
+    }
+
+    /* Custom styles for the college logo */
+    .college-logo {
+        max-width: 100px;
+    }
+
+    /* Custom styles for college name and tagline */
+    .college-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #FFFFFF; /* Blue color */
+    }
+
+    .tagline {
+        font-size: 18px;
+        color: #fff; /* White text color */
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <!-- College Logo -->
+                <img src="~/Resources/uc-college-aluva-mobile-logo (1).png" alt="College Logo" class="college-logo">
+
+                <!-- College Name and Tagline -->
+                <div class="college-name">Master of Computer Applications</div>
+                <div class="tagline">Union Christian College, Aluva</div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Duty Leave Records</h2>
+
+        @if (Model.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                        <th>Reason</th>
+                        <th>Remarks</th>
+                        <th>Status</th>
+                        <th>Duty Certificate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dutyLeave in Model)
+                    {
+                        <tr>
+                            <td>@dutyLeave.FromDate.ToShortDateString()</td>
+                            <td>@dutyLeave.ToDate.ToShortDateString()</td>
+                            <td>@dutyLeave.Reason</td>
+                            <td>@dutyLeave.Remarks</td>
+                            <td>@dutyLeave.Status</td>
+                            <td>
+                                <form action="@Url.Action("UploadCertificate", "TeachingStaff")" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="dutyLeaveId" value="@dutyLeave.Id" />
+                                    <input type="file" name="certificateFile" />
+                                    <button type="submit">Upload Certificate</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No duty leave records found.</p>
+        }
+        <div>
+            @Html.ActionLink("Back to Index", "Index", "TeachingStaff")
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-r1owj8dTAxw/itqf3QMHnIZaEBhP4d5rpbW9ycELW4Y3Uu32rd0I4Z0pAByWUNuj" crossorigin="anonymous"></script>
+</body>
+</html>
