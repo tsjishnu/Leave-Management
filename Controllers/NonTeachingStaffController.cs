@@ -18,25 +18,28 @@ namespace Leave_Management.Controllers
         {
             db = new LoginContext(); // Initialize the LoginContext here
         }
-        // GET: NonTeachinStaff
+
         public ActionResult Index()
         {
-
             // Get the current date
             DateTime currentDate = DateTime.Now.Date;
             string currentEmployeeEmail = Session["Email"] as string;
 
-            // Fetch approved leave requests with FromDate greater than or equal to the current date
+            // Fetch approved leave requests with FromDate greater than or equal to the current date for all employees
             List<LeaveRequest> approvedLeaveRequests = db.LeaveRequests
-                .Where(lr => lr.Status == "Approved" && lr.FromDate >= currentDate && lr.Email == currentEmployeeEmail)
+                .Where(lr => lr.Status == "Approved" && lr.FromDate >= currentDate)
                 .ToList();
-
 
             // Fetch all employees
             var employees = db.Employees.ToDictionary(e => e.Email, e => e.FullName);
 
-            // Calculate leave type details for each employee
-            var leaveTypeDetails = approvedLeaveRequests
+            // Fetch approved leave requests with FromDate greater than or equal to the current date for the current employee
+            List<LeaveRequest> currentEmployeeApprovedLeaveRequests = db.LeaveRequests
+                .Where(lr => lr.Status == "Approved" && lr.FromDate >= currentDate && lr.Email == currentEmployeeEmail)
+                .ToList();
+
+            // Calculate leave type details for the current employee
+            var currentEmployeeLeaveTypeDetails = currentEmployeeApprovedLeaveRequests
                 .GroupBy(lr => lr.Type)
                 .ToDictionary(
                     group => group.Key,
@@ -46,16 +49,19 @@ namespace Leave_Management.Controllers
                         RequestCount = group.Count()
                     });
 
-            // Create the TeachingStaffViewModel and assign the approved leave requests, employee full names, and leave type details
+            // Create the TeachingStaffViewModel and assign the approved leave requests, employee full names,
+            // and leave type details for the current employee
             var viewModel = new TeachingStaffViewModel
             {
                 ApprovedLeaveRequests = approvedLeaveRequests,
                 EmployeeFullNames = employees,
-                LeaveTypeDetails = leaveTypeDetails
+                LeaveTypeDetails = currentEmployeeLeaveTypeDetails
             };
 
             return View(viewModel);
         }
+
+
 
         public ActionResult RequestLeave()
         {

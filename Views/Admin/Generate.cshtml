@@ -1,4 +1,7 @@
-﻿@{
+﻿@model Leave_Management.Models.DateSelectionModel
+
+@{
+    ViewBag.Title = "Generate Report";
     Layout = null;
 }
 
@@ -6,12 +9,11 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Leave Request Confirmation</title>
+    <title>@ViewBag.Title</title>
     <style>
-        /* Custom styles for the leave request confirmation */
         body {
             margin: 0;
-            padding-top: 0;
+            padding-top: 30px;
             background-color: #f8f9fa;
             display: flex;
             flex-direction: column;
@@ -19,34 +21,64 @@
             min-height: 100vh;
         }
 
+        h2 {
+            padding-top: 50px;
+            color: #1b6ec2;
+        }
+
         .form-container {
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 349px;
+            width: 350px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .alert-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            border: 2px solid #1b6ec2;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            max-width: 260px;
+            background-color: #1b6ec2;
+            border-color: #1b6ec2;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
             padding: 10px;
             border-radius: 5px;
-            text-align: center;
+            transition: background-color 0.3s ease;
         }
 
-        /* Custom CSS to change the navbar color and make it fit the screen width */
+            button:hover {
+                background-color: #1b9fe1;
+            }
+
+        /* Custom styles for the navbar */
         .navbar {
             margin: 0;
-            background-color: #fff;
+            background-color: #1b6ec2;
             width: 100%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Custom CSS for the footer */
+        /* Custom styles for the footer */
         .footer {
             background-color: #f8f9fa;
             text-align: center;
@@ -62,25 +94,13 @@
         .college-name {
             font-size: 24px;
             font-weight: bold;
-            color: #1b6ec2; /* Blue color */
+            color: #FFFFFF; /* Blue color */
         }
 
         .tagline {
             font-size: 18px;
-            color: #1b6ec2; /* White text color */
+            color: #fff; /* White text color */
             font-weight: bold;
-        }
-
-        .button {
-            background-color: #1b6ec2;
-            border-color: #1b6ec2;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            text-decoration:none;
         }
     </style>
 </head>
@@ -99,18 +119,28 @@
     </header>
 
     <div class="container">
+        <h2 class="text-center">Date Selection</h2>
+
         <div class="form-container">
-            <div class="alert alert-success">
-                Your leave Modification request has been successfully submitted to the department head. Please wait for their approval, and you will be notified once a decision has been made.
-            </div>
-            <div class="text-center">
-                <a href="@Url.Action("Index", "NonTeachingStaff")" class="button">Back to Home</a>
-            </div>
+            @using (Html.BeginForm("Generate", "Admin", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.StartDate, "Select Start Date:")
+                    @Html.EditorFor(m => m.StartDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EndDate, "Select End Date:")
+                    @Html.EditorFor(m => m.EndDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            }
         </div>
     </div>
 
     <footer class="footer">
-        <p>Leave Management System &copy; 2023. All rights reserved.</p>
+        <p>Leave Management System &copy; @DateTime.Now.Year. All rights reserved.</p>
         <p>Contact: office@mcaucc.edu.in | Phone: +91-XXXXXXXXXX</p>
     </footer>
 

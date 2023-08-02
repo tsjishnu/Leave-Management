@@ -11,6 +11,7 @@
     <title>Non Teaching Staff Portal</title>
     <style>
         /* Custom styles for the index page */
+
         body {
             margin: 0;
             padding-top: 0;
@@ -19,10 +20,8 @@
             flex-direction: column;
             justify-content: center;
             min-height: 100vh;
-        }
-
-        .container {
-            text-align: center;
+            background-image:url("/Images/pexels-skitterphoto-419635.jpg");
+            background-size: cover;
         }
 
         .college-info {
@@ -31,34 +30,37 @@
             align-items: flex-start;
         }
 
-        .btn-primary {
+        .button {
             background-color: #1b6ec2;
             border-color: #1b6ec2;
             color: #fff;
             font-weight: bold;
             cursor: pointer;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 1px;
             transition: background-color 0.3s ease;
-            width: 100%; /* Set a fixed width for the buttons */
+            width: 330px; /* Set a fixed width for the buttons */
             height: 60px; /* Set a fixed height for the buttons */
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px; /* Add some margin between the buttons */
+            margin-bottom: 2px; /* Add some margin between the buttons */
             text-decoration: none; /* Remove underline from links/buttons */
+            margin-left: -19px;
         }
 
             .btn-primary:hover {
-                background-color: #1b9fe1;
+                background-color: #1b6ec2;
             }
 
         /* Custom CSS to change the navbar color and make it fit the screen width */
         .navbar {
             margin: 0;
-            background-color: #1b6ec2;
+            background-color: #fff;
             width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
 
         /* Custom CSS for the footer */
         .footer {
@@ -76,13 +78,13 @@
         .college-name {
             font-size: 24px;
             font-weight: bold;
-            color: #FFFFFF;
+            color: #1b6ec2;
             margin-left: 270px;
         }
 
         .tagline {
             font-size: 18px;
-            color: #fff; /* White text color */
+            color: #1b6ec2; /* White text color */
             font-weight: bold;
             margin-left: 320px;
         }
@@ -107,9 +109,9 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin: 10px;
             width: 445px;
+            margin-left: 794px;
+            margin-top: -463px;
         }
-        /* Styling for the "Manage Profile" dropdown */
-        /* Custom styles for the "Manage Profile" dropdown */
         .dropdown-toggle::after {
             display: inline-block;
             width: 0;
@@ -126,7 +128,7 @@
         /* Update the background color and text color of the dropdown menu */
         .dropdown-menu {
             min-width: auto;
-            background-color: #1b9fe1; /* Change the background color to the desired color */
+            background-color: #1b6ec2; /* Change the background color to the desired color */
         }
 
         .dropdown-item {
@@ -138,10 +140,22 @@
                 background-color: rgba(25, 158, 225, 0.9);
             }
 
-
-        h2 {
-            margin-top: 100px;
+        .leftcontainer {
+            margin-top: 113px;
+            background-color: #99ccff;
+            width: 330px;
         }
+        .navbar-nav .nav-link.dropdown-toggle {
+            color: #1b6ec2;
+        }
+        .GenerateReportbtn{
+            color: #1b6ec2;
+            margin-left: 105px;
+
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -155,12 +169,17 @@
                     <div class="college-name">Master of Computer Applications</div>
                     <div class="tagline">Union Christian College, Aluva</div>
                 </div>
+
+                <div class="GenerateReportbtn" S>
+                    <a href="@Url.Action("Generate","Admin")">Generate Report</a>
+                </div>
                 <!-- "Manage Profile" Dropdown -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="manageProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Manage Profile
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="manageProfileDropdown">
                             <a class="dropdown-item" href="@Url.Action("ChangePassword", "Admin")">Change Password</a>
                             <a class="dropdown-item" href="@Url.Action("Logout", "Admin")">Logout</a>
@@ -171,58 +190,57 @@
         </nav>
     </header>
 
-    <div class="container mt-5">
-        <h2>Welcome to Admin Portal</h2>
-        <div class="row mt-5">
-            <!-- Left Section: Buttons -->
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ReviewLeaveRequest","Admin")" class="btn btn-primary btn-lg">Review Leave Requests</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ManageSignupRequest","Admin")" class="btn btn-primary btn-lg">Review Signup Requests</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ReviewDutyCertificate","Admin")" class="btn btn-primary btn-lg">Review Duty Certificate</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ReviewMedicalCertificate","Admin")" class="btn btn-primary btn-lg">Review Medical Certificate</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("StudyLeaveDocument","Admin")" class="btn btn-primary btn-lg">Review Study Leave Document</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("AddLeave","Admin")" class="btn btn-primary btn-lg">Add Leave</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ManageSignupRequest","Admin")" class="btn btn-primary btn-lg">Manage Signup Requests</a>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="@Url.Action("ManageEmployee","Admin")" class="btn btn-primary btn-lg">Manage Employees</a>
-                    </div>
+    <div class="leftcontainer">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="@Url.Action("ReviewLeaveRequest","Admin")" class="button">Review Leave Requests</a>
                 </div>
-            </div>
-            <!-- Right Section: Approved Leave Requests -->
-            <div class="col-md-6">
-                <div class="right-section">
-                    <h3>Approved Leave Requests</h3>
-                    <ul class="approved-leave-requests">
-                        @if (Model != null && Model.ApprovedLeaveRequests != null && Model.EmployeeFullNames != null)
-                        {
-                            foreach (var leaveRequest in Model.ApprovedLeaveRequests)
-                            {
-                                string fullName = Model.EmployeeFullNames.ContainsKey(leaveRequest.Email) ? Model.EmployeeFullNames[leaveRequest.Email] : "Unknown";
-                                <li>@fullName - @leaveRequest.Type (@leaveRequest.FromDate.ToShortDateString() to @leaveRequest.ToDate.ToShortDateString())</li>
-                            }
-                        }
-                        else
-                        {
-                            <li>No approved leave requests</li>
-                        }
-                    </ul>
+                <div class="col-md-12">
+                    <a href="@Url.Action("ManageSignupRequest","Admin")" class="button">Review Signup Requests</a>
                 </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("ReviewDutyCertificate","Admin")" class="button">Review Duty Certificate</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("ReviewMedicalCertificate","Admin")" class="button">Review Medical Certificate</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("StudyLeaveDocument","Admin")" class="button">Review Study Leave Document</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("AddLeave","Admin")" class="button">Add Leave</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("ManageSignupRequest","Admin")" class="button">Manage Signup Requests</a>
+                </div>
+                <div class="col-md-12">
+                    <a href="@Url.Action("ManageEmployee","Admin")" class="button">Manage Employees</a>
+                </div
+
             </div>
+        </div>
+    </div>
+
+    <!-- Right Section: Approved Leave Requests -->
+    <div class="col-md-6">
+
+        <div class="right-section">
+            <h3>Approved Leave Requests</h3>
+            <ul class="approved-leave-requests">
+                @if (Model != null && Model.ApprovedLeaveRequests != null && Model.EmployeeFullNames != null)
+                {
+                    foreach (var leaveRequest in Model.ApprovedLeaveRequests)
+                    {
+                        string fullName = Model.EmployeeFullNames.ContainsKey(leaveRequest.Email) ? Model.EmployeeFullNames[leaveRequest.Email] : "Unknown";
+                        <li>@fullName - @leaveRequest.Type (@leaveRequest.FromDate.ToShortDateString() to @leaveRequest.ToDate.ToShortDateString())</li>
+                    }
+                }
+                else
+                {
+                    <li>No approved leave requests</li>
+                }
+            </ul>
         </div>
     </div>
 

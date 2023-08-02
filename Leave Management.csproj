@@ -98,6 +98,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <None Include="Resources\uc-college-aluva-mobile-logo %281%29.png" />
+    <Content Include="Images\1690975220909.jpg" />
+    <Content Include="Images\20221012_100745.jpg" />
+    <Content Include="Images\abd.jpg" />
+    <Content Include="Images\pexels-skitterphoto-419635.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +128,7 @@
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\CasualLeave.cs" />
     <Compile Include="Models\changePassword.cs" />
+    <Compile Include="Models\DateSelectionModel.cs" />
     <Compile Include="Models\DutyLeave.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeDetailsViewModel.cs" />
@@ -212,6 +217,9 @@
     <Content Include="Views\Admin\ViewemployeeDetails.cshtml" />
     <Content Include="Views\Admin\EditEmployee.cshtml" />
     <Content Include="Views\Admin\RemoveEmployee.cshtml" />
+    <Content Include="Views\Admin\Generate.cshtml" />
+    <Content Include="Views\Admin\ApprovedLeaveReport.cshtml" />
+    <Content Include="Views\Admin\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

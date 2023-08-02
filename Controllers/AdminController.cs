@@ -588,7 +588,45 @@ namespace Leave_Management.Controllers
             db.SaveChanges();
             return RedirectToAction("ManageEmployee");
         }
+        public ActionResult Generate()
+        {
+            var model = new DateSelectionModel();
+            return View(model);
+        }
 
+        [HttpPost]
+        public ActionResult Generate(DateSelectionModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ApprovedLeaveReport", new { startDate = model.StartDate, endDate = model.EndDate });
+            }
+            return View(model);
+        }
+        public ActionResult ApprovedLeaveReport(DateTime? startDate, DateTime? endDate)
+        {
+            DateTime currentDate = DateTime.Now.Date;
 
+            // Fetch approved leave requests from the database
+            var query = db.LeaveRequests.Where(lr => lr.Status == "Approved" && lr.FromDate >= currentDate);
+
+            // Apply date range filtering if startDate and endDate parameters are provided
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                query = query.Where(lr => lr.FromDate >= startDate && lr.ToDate <= endDate);
+            }
+
+            List<LeaveRequest> approvedLeaveRequests = query.ToList();
+
+            // Get the employee full names for approved leave requests
+            var viewModel = new TeachingStaffViewModel
+            {
+                ApprovedLeaveRequests = approvedLeaveRequests,
+                EmployeeFullNames = GetEmployeeFullNames(approvedLeaveRequests)
+            };
+
+            // Pass the viewModel to the view
+            return View(viewModel);
+        }
     }
 }
